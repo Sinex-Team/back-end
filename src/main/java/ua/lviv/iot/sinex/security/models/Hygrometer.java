@@ -1,15 +1,14 @@
 package ua.lviv.iot.sinex.security.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ua.lviv.iot.sinex.security.models.user.User;
 
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,5 +20,9 @@ public class Hygrometer {
     @GeneratedValue
     private Integer id;
     private String humidity;
-    private String datetime;
+    private LocalDateTime dateAndTime;
+
+    @ManyToOne
+    private User user;
+
 }

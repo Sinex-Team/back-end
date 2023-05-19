@@ -1,6 +1,5 @@
 package ua.lviv.iot.sinex.security.models.user;
 
-import ua.lviv.iot.sinex.security.token.Token;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -8,6 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import ua.lviv.iot.sinex.security.models.Hygrometer;
+
 import java.util.Collection;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -38,8 +40,7 @@ public class User implements UserDetails {
   private Role role;
 
   @OneToMany(mappedBy = "user")
-  private List<Token> tokens;
-
+  private List<Hygrometer> hygrometer;
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority(role.name()));

@@ -62,6 +62,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authToken);
       }
     }
+//    if (request.getServletPath().contains("/api/v1/hygrometers/**")) {
+//      boolean isTokenValid = tokenRepository.findByToken(jwt)
+//              .map(t -> !t.isExpired() && !t.isRevoked())
+//              .orElse(false);
+//      if (!isTokenValid) {
+//        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
+//        return;
+//      }
+//    }
     filterChain.doFilter(request, response);
   }
 }
