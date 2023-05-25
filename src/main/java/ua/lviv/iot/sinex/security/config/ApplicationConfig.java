@@ -1,5 +1,6 @@
 package ua.lviv.iot.sinex.security.config;
 
+import org.springframework.scheduling.annotation.EnableScheduling;
 import ua.lviv.iot.sinex.security.models.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+@EnableScheduling
 @RequiredArgsConstructor
 public class ApplicationConfig {
 

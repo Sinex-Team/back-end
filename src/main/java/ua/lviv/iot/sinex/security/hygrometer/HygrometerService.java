@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.lviv.iot.sinex.security.models.Hygrometer;
 
-import java.util.List;
-
 @Service
 public class HygrometerService {
     private final HygrometerRepository hygrometerRepository;

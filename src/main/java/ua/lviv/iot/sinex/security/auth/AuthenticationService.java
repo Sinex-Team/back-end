@@ -10,23 +10,27 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.lviv.iot.sinex.security.config.JwtService;
+import ua.lviv.iot.sinex.security.models.WateringSystem;
 import ua.lviv.iot.sinex.security.models.user.Role;
 import ua.lviv.iot.sinex.security.models.user.User;
 import ua.lviv.iot.sinex.security.models.user.UserRepository;
 import ua.lviv.iot.sinex.security.token.Token;
 import ua.lviv.iot.sinex.security.token.TokenRepository;
 import ua.lviv.iot.sinex.security.token.TokenType;
+import ua.lviv.iot.sinex.security.wateringSystem.WateringSystemRepository;
 
 import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UserRepository repository;
+    private final UserRepository userRepository;
+    private final WateringSystemRepository systemRepository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
                 .firstname(request.getFirstname())
@@ -35,7 +39,13 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        var savedUser = repository.save(user);
+        var savedUser = userRepository.save(user);
+
+        var system = new WateringSystem();
+        system.setUser(savedUser);
+        system.setOwnerNameAndSurname(savedUser.getFirstname()+" "+savedUser.getLastname());
+        systemRepository.save(system);
+
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
@@ -52,7 +62,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        var user = repository.findByEmail(request.getEmail())
+        var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
@@ -99,7 +109,7 @@ public class AuthenticationService {
         refreshToken = authHeader.substring(7);
         userEmail = jwtService.extractUsername(refreshToken);
         if (userEmail != null) {
-            var user = this.repository.findByEmail(userEmail)
+            var user = this.userRepository.findByEmail(userEmail)
                     .orElseThrow();
             if (jwtService.isTokenValid(refreshToken, user)) {
                 var accessToken = jwtService.generateToken(user);

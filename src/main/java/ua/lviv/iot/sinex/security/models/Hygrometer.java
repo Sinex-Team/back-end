@@ -22,7 +22,4 @@ public class Hygrometer {
     private String humidity;
     private LocalDateTime dateAndTime;
 
-    @ManyToOne
-    private User user;
-
 }
