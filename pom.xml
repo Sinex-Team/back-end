@@ -8,11 +8,11 @@
 		<version>3.0.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.backaned</groupId>
-	<artifactId>server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>server</name>
-	<description>Demo project for Spring Boot</description>
+	<groupId>garden.aquamole</groupId>
+	<artifactId>aquamole</artifactId>
+	<version>0.1.0</version>
+	<name>aquamole</name>
+	<description>Aquamole - smart watering system</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
