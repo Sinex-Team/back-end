@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class User implements UserDetails {
   private Integer id;
   private String firstname;
   private String lastname;
+  @Email
   private String email;
   private String password;
 

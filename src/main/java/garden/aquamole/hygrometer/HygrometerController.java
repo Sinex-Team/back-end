@@ -3,10 +3,15 @@ package garden.aquamole.hygrometer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import garden.aquamole.config.JwtService;
 import garden.aquamole.models.Hygrometer;
 import garden.aquamole.models.user.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 
@@ -20,7 +25,7 @@ public class HygrometerController {
         this.hygrometerService = hygrometerService;
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Hygrometer> save(@RequestBody Hygrometer hygrometer) {
         if (hygrometer.getId() == null) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
@@ -43,5 +48,14 @@ public class HygrometerController {
         Hygrometer hygrometerWithNullData = new Hygrometer();
         Integer id = hygrometerService.createId(hygrometerWithNullData);
         return ResponseEntity.ok(id);
+    }
+
+    @GetMapping("/:{id}")
+    public ResponseEntity<Hygrometer> getById(@PathVariable Integer id){
+         Hygrometer foundedHygrometer = hygrometerService.getById(id);
+         if(foundedHygrometer == null){
+             return ResponseEntity.notFound().build();
+         }
+         return ResponseEntity.ok(foundedHygrometer);
     }
 }

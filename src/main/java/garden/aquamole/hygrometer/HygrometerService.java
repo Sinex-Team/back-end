@@ -29,4 +29,8 @@ public class HygrometerService {
     public boolean existById(Integer id) {
         return hygrometerRepository.existsById(id);
     }
+
+    public Hygrometer getById(Integer id){
+        return hygrometerRepository.getById(id);
+    }
 }
