@@ -1,6 +1,6 @@
-package com.alibou.security.token;
+package garden.aqamole.token;
 
-import com.alibou.security.user.User;
+import garden.aqamole.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.alibou.security;
+package garden.aqamole;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

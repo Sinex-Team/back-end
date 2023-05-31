@@ -1,4 +1,4 @@
-package com.alibou.security.demo;
+package garden.aqamole.demo;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

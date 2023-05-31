@@ -1,4 +1,4 @@
-package com.alibou.security.token;
+package garden.aqamole.token;
 
 public enum TokenType {
   BEARER

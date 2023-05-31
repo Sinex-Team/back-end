@@ -1,4 +1,4 @@
-package com.alibou.security.config;
+package garden.aqamole.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

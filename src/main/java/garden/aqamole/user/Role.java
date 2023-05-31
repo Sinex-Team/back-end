@@ -1,4 +1,4 @@
-package com.alibou.security.user;
+package garden.aqamole.user;
 
 public enum Role {
 
