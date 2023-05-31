@@ -1,6 +1,5 @@
-package com.alibou.security.config;
+package garden.aquamole.config;
 
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +27,7 @@ public class SecurityConfiguration {
         .csrf()
         .disable()
         .authorizeHttpRequests()
-        .requestMatchers("/api/v1/auth/**")
+        .requestMatchers("/auth/**")
           .permitAll()
         .anyRequest()
           .authenticated()
@@ -39,11 +38,9 @@ public class SecurityConfiguration {
         .authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         .logout()
-        .logoutUrl("/api/v1/auth/logout")
+        .logoutUrl("/auth/logout")
         .addLogoutHandler(logoutHandler)
-        .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-    ;
-
+        .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
     return http.build();
   }
 }

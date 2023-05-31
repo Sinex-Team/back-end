@@ -1,5 +1,7 @@
-package com.alibou.security.auth;
+package garden.aquamole.auth;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationRequest {
-
-  private String email;
-  String password;
+    @Email
+    private String email;
+    String password;
 }

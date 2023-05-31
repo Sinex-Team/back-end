@@ -1,6 +1,7 @@
-package com.alibou.security.config;
+package garden.aquamole.config;
 
-import com.alibou.security.user.UserRepository;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import garden.aquamole.models.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+@EnableScheduling
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
