@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +20,7 @@ import garden.aquamole.token.Token;
 import garden.aquamole.token.TokenRepository;
 import garden.aquamole.token.TokenType;
 import garden.aquamole.wateringSystem.WateringSystemRepository;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 
@@ -32,6 +35,10 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        if (userRepository.existsUserByEmail(request.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "A user with this email address already exists");
+        }
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
