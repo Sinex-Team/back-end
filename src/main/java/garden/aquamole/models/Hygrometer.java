@@ -12,12 +12,12 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "_hygrometer")
+@Table(name = "hygrometer")
 public class Hygrometer {
     @Id
     @GeneratedValue
@@ -25,5 +25,4 @@ public class Hygrometer {
     @Pattern(regexp = "^(?:100|[1-9]?[0-9])%$\n")
     private String humidity;
     private LocalDateTime dateAndTime;
-
 }
