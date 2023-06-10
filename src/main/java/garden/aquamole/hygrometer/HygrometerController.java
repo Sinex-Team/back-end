@@ -28,6 +28,9 @@ public class HygrometerController {
         if (hygrometer.getId() == null) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
+        if(hygrometer.getHumidity() == null){
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+        }
         if (!hygrometerService.existById(hygrometer.getId())) {
             return ResponseEntity.badRequest().build();
         }

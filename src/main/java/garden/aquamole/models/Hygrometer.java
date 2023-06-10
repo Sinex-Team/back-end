@@ -22,7 +22,6 @@ public class Hygrometer {
     @Id
     @GeneratedValue
     private Integer id;
-    @Pattern(regexp = "^(?:100|[1-9]?[0-9])%$\n")
     private Integer humidity;
     private LocalDateTime dateAndTime;
 
