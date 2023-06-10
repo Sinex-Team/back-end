@@ -3,9 +3,7 @@ package garden.aquamole.hygrometer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import garden.aquamole.config.JwtService;
 import garden.aquamole.models.Hygrometer;
-import garden.aquamole.models.user.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +19,7 @@ public class HygrometerController {
     private final HygrometerService hygrometerService;
 
     @Autowired
-    public HygrometerController(HygrometerService hygrometerService, JwtService jwtService, UserService userService) {
+    public HygrometerController(HygrometerService hygrometerService) {
         this.hygrometerService = hygrometerService;
     }
 

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>garden.aquamole</groupId>
 	<artifactId>aquamole</artifactId>
-	<version>0.1.0</version>
+	<version>0.2.8</version>
 	<name>aquamole</name>
 	<description>Aquamole - smart watering system</description>
 	<properties>
