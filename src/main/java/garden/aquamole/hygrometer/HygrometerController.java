@@ -1,5 +1,6 @@
 package garden.aquamole.hygrometer;
 
+import garden.aquamole.models.ResponseHygrometerId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,21 +35,15 @@ public class HygrometerController {
         if (!hygrometerService.existById(hygrometer.getId())) {
             return ResponseEntity.badRequest().build();
         }
-        Integer id = hygrometerService.findTopByOrderByIdDesc();
-        if (id == null) {
-            return ResponseEntity.notFound().build();
-        }
-        hygrometer.setId(id);
         hygrometer.setDateAndTime(LocalDateTime.now().withNano(0));
         hygrometerService.saveHygrometer(hygrometer);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/id")
-    public ResponseEntity<Integer> returnId() {
+    public ResponseEntity<ResponseHygrometerId> returnId() {
         Hygrometer hygrometerWithNullData = new Hygrometer();
-        Integer id = hygrometerService.createId(hygrometerWithNullData);
-        return ResponseEntity.ok(id);
+        return ResponseEntity.ok(hygrometerService.createId(hygrometerWithNullData));
     }
 
     @GetMapping("/:{id}")

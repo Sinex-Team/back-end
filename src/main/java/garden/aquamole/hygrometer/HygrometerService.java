@@ -1,5 +1,6 @@
 package garden.aquamole.hygrometer;
 
+import garden.aquamole.models.ResponseHygrometerId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import garden.aquamole.models.Hygrometer;
@@ -12,13 +13,11 @@ public class HygrometerService {
     public HygrometerService(HygrometerRepository hygrometerRepository) {
         this.hygrometerRepository = hygrometerRepository;
     }
-    public Integer createId(Hygrometer hygrometerWithNullData) {
+    public ResponseHygrometerId createId(Hygrometer hygrometerWithNullData) {
         hygrometerRepository.save(hygrometerWithNullData);
-        return hygrometerWithNullData.getId();
-    }
-
-    public Integer findTopByOrderByIdDesc() {
-        return hygrometerRepository.findTopByOrderByIdDesc();
+        ResponseHygrometerId hygrometerId = new ResponseHygrometerId();
+        hygrometerId.setId(hygrometerWithNullData.getId());
+        return hygrometerId;
     }
 
     public void saveHygrometer(Hygrometer hygrometer) {
