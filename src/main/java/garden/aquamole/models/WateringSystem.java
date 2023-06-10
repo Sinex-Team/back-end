@@ -25,6 +25,4 @@ public class WateringSystem {
     @JoinColumn(name = "user_id")
     private User user;
 
-//    @OneToMany
-//    private List<Hygrometer> hygrometer;
 }
