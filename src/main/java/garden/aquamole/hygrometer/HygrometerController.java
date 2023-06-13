@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -44,12 +45,14 @@ public class HygrometerController {
         return ResponseEntity.ok(hygrometerService.createId(hygrometerWithNullData));
     }
 
-    @GetMapping("/:{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Hygrometer> getById(@PathVariable Integer id){
          Hygrometer foundedHygrometer = hygrometerService.getById(id);
-         if(foundedHygrometer == null){
-             return ResponseEntity.notFound().build();
-         }
          return ResponseEntity.ok(foundedHygrometer);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Hygrometer>> getAll() {
+        return ResponseEntity.ok(hygrometerService.findAll());
     }
 }
