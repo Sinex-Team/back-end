@@ -29,7 +29,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                     .requestMatchers( "/auth/**")
                     .permitAll()
-                  .requestMatchers( "/hygrometers/**")
+                    .requestMatchers( "/hygrometers/**")
                     .permitAll()
                 .anyRequest().authenticated()
                 .and()

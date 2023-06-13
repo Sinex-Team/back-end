@@ -1,7 +1,7 @@
 package garden.aquamole.hygrometer;
 
 import garden.aquamole.models.ResponseHygrometerId;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import garden.aquamole.models.Hygrometer;
@@ -18,13 +18,9 @@ import java.time.LocalDateTime;
 @CrossOrigin
 @RestController
 @RequestMapping("/hygrometers")
+@RequiredArgsConstructor
 public class HygrometerController {
     private final HygrometerService hygrometerService;
-
-    @Autowired
-    public HygrometerController(HygrometerService hygrometerService) {
-        this.hygrometerService = hygrometerService;
-    }
 
     @PostMapping
     public ResponseEntity<Hygrometer> save(@RequestBody Hygrometer hygrometer) {
@@ -39,7 +35,7 @@ public class HygrometerController {
         }
         hygrometer.setDateAndTime(LocalDateTime.now().withNano(0));
         hygrometerService.saveHygrometer(hygrometer);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(hygrometer);
     }
 
     @PostMapping("/id")

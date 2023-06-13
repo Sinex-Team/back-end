@@ -22,7 +22,7 @@ import garden.aquamole.models.WateringSystem;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "_user")
+@Table(name = "user")
 public class User implements UserDetails {
 
   @Id
@@ -31,6 +31,7 @@ public class User implements UserDetails {
   private String firstname;
   private String lastname;
   @Email
+  @Column(unique = true, nullable = false)
   private String email;
   private String password;
 
