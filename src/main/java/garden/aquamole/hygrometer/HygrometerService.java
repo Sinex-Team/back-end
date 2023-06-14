@@ -8,6 +8,7 @@ import garden.aquamole.models.Hygrometer;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HygrometerService {
@@ -31,13 +32,11 @@ public class HygrometerService {
     public boolean existById(Integer id) {
         return hygrometerRepository.existsById(id);
     }
-
-    public Hygrometer getById(Integer id){
-        return hygrometerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
-
     public List<Hygrometer> findAll(){
         return hygrometerRepository.findAll();
     }
 
+    public Optional<Hygrometer> findById(Integer id){
+        return hygrometerRepository.findById(id);
+    }
 }
