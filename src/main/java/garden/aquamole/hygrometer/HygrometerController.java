@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HygrometerController {
     private final HygrometerService hygrometerService;
+    private final HygrometerRepository hygrometerRepository;
 
     @PostMapping
     public ResponseEntity<Hygrometer> save(@RequestBody Hygrometer hygrometer) {
@@ -46,9 +48,10 @@ public class HygrometerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Hygrometer> getById(@PathVariable Integer id){
-         Hygrometer foundedHygrometer = hygrometerService.getById(id);
-         return ResponseEntity.ok(foundedHygrometer);
+    public Hygrometer getById(@PathVariable Integer id){
+        return hygrometerRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping
